@@ -1,0 +1,34 @@
+<html>
+<head>
+    <title>兼容ie和chrome的点击复制功能</title>
+    <meta charset="utf-8">
+    <meta name="author" content="JeffXun">
+    <meta name="description" content="">
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script>
+        /*  
+         * 原理：创建一个input元素，然后将内容设置到这个input上面，再执行copy
+         */
+        function OnCopy(eve)
+        {
+            var text = $("#id-input").val();
+            // 创建一个输入框
+            var hide_input = $("<input id='id-input-copy-9527' type='text'></input>");
+            hide_input.val(text);
+            $(document).find("body").append(hide_input);
+            hide_input.select();
+            document.execCommand("Copy",null); // 执行浏览器复制命令
+            $("#id-input-copy-9527").remove();
+            alert('复制成功');
+        }
+    </script>
+</head>
+<body>
+    <h2>兼容ie和chrome的点击复制功能</h2>
+    <div>
+        <label>复制的例子:</label>
+        <input type="text" id="id-input">
+        <a href="javascript:void(0);" onclick="OnCopy(this)">点击复制</a>
+    </div>
+</body>
+</html>
